@@ -68,7 +68,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                     padding: const EdgeInsets.all(20),
                     itemCount: 10,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 150,
+                      maxCrossAxisExtent: 160,
                       childAspectRatio: 0.6,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 12),
@@ -84,7 +84,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                           Container(
-                            height: 104,
+                            height: 120,
                             width: 118,
                             decoration: BoxDecoration(
                               color: ceruleanBlue.withOpacity(0.4),
@@ -111,11 +111,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text('Grass, Poison',style: TextStyle(
-                                  color: Colors.black,
+                                  color: doveGrey,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400
                                 ),),
-
+                                SizedBox(height: 5,),
                               ],
                             ),
                           )
