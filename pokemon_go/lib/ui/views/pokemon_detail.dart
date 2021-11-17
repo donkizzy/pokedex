@@ -14,14 +14,14 @@ class PokeMonDetail extends StatefulWidget {
 
 class _PokeMonDetailState extends State<PokeMonDetail> {
 
-  ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(false) ;
+  ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(true) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: ValueListenableBuilder(
         valueListenable: showFavouriteButton,
         builder: (BuildContext context,bool value, Widget? child) {
-          return value ? InkWell(
+          return value ? GestureDetector(
             onTap: (){
               showFavouriteButton.value = !value ;
             },
@@ -102,8 +102,10 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
+
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text('Height',style: TextStyle(
                         color: doveGrey,
@@ -112,14 +114,15 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                     ),),
                     Text('69',style: TextStyle(
                         color: mirageBlue,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
                     ),),
 
                   ],
                 ),
                 const SizedBox(width: 50,),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text('Weight',style: TextStyle(
                         color: doveGrey,
@@ -128,14 +131,15 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                     ),),
                     Text('9',style: TextStyle(
                         color: mirageBlue,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
                     ),),
 
                   ],
                 ),
                 const SizedBox(width: 50,),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text('BMI',style: TextStyle(
                         color: doveGrey,
@@ -144,8 +148,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                     ),),
                     Text('69.2',style: TextStyle(
                         color: mirageBlue,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
                     ),),
 
                   ],
@@ -167,14 +171,13 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
           ),
           Divider(
             color: doveGrey.withOpacity(0.1),thickness: 1,),
-         const  SizedBox(height: 16,),
-          const StatsItem(score: 20.0,title: 'HP',progressColor: cerisePink,),
-          const StatsItem(score: 30.0,title: 'Attack',progressColor: cerisePink,),
-          const StatsItem(score: 30.0,title: 'Defense',progressColor: cerisePink,),
-          const StatsItem(score: 40.0,title: 'Special Attack',progressColor: goldTipsYellow,),
-          const StatsItem(score: 40.0,title: 'Special Defense',progressColor: goldTipsYellow,),
-          const StatsItem(score: 10.0,title: 'Speed',progressColor: cerisePink,),
-          const StatsItem(score: 30.0,title: 'Avg. Power',progressColor: cerisePink,),
+          const StatsItem(score: 20,title: 'HP',progressColor: cerisePink,),
+          const StatsItem(score: 3,title: 'Attack',progressColor: cerisePink,),
+          const StatsItem(score: 30,title: 'Defense',progressColor: cerisePink,),
+          const StatsItem(score: 4,title: 'Special Attack',progressColor: goldTipsYellow,),
+          const StatsItem(score: 40,title: 'Special Defense',progressColor: goldTipsYellow,),
+          const StatsItem(score: 10,title: 'Speed',progressColor: cerisePink,),
+          const StatsItem(score: 80,title: 'Avg. Power',progressColor: cerisePink,),
         ],
       ),
     );
