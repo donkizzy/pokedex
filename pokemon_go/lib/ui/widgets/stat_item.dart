@@ -7,7 +7,7 @@ import 'package:pokemon_go/ui/widgets/custom_linear_indicator.dart';
 class StatsItem extends StatelessWidget {
 
   final String title ;
-  final String score ;
+  final double score ;
   final Color progressColor ;
    const StatsItem({Key? key, required this.title,required this.score,required this.progressColor}) : super(key: key);
 
@@ -26,7 +26,7 @@ class StatsItem extends StatelessWidget {
                   fontWeight: FontWeight.w400
               ),),
               const SizedBox(width: 5,),
-              Text(score,style: const TextStyle(
+              Text('$score',style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600
@@ -34,7 +34,7 @@ class StatsItem extends StatelessWidget {
             ],
           ),
           const  SizedBox(height: 8,),
-           ProgressBar(current: 20,color: progressColor,)
+           ProgressBar(current: score,color: progressColor,)
         ],
       ),
     ) ;
