@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
+import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
 import 'package:pokemon_go/ui/widgets/rectangle_tab_indicator.dart';
 
@@ -67,11 +68,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                   shrinkWrap: true,
                     padding: const EdgeInsets.all(20),
                     itemCount: 10,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 160,
-                      childAspectRatio: 0.6,
+                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
                       crossAxisSpacing: 10,
-                      mainAxisSpacing: 12),
+                      mainAxisSpacing: 12,
+                    childAspectRatio: width(context) /
+                        (height(context) - 100),
+                  ),
                     itemBuilder: (BuildContext context,int index) {
                     return  PokemonItem(key: UniqueKey(),) ;
                     },),
@@ -83,11 +86,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                   shrinkWrap: true,
                     padding: const EdgeInsets.all(20),
                     itemCount: 10,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 160,
-                      childAspectRatio: 0.6,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 12),
+                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: width(context) /
+                        (height(context) - 100),
+                  ),
                     itemBuilder: (BuildContext context,int index) {
                     return PokemonItem(key: UniqueKey(),);
                     },),
