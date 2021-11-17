@@ -43,16 +43,36 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                 pinned: true,
                 centerTitle: true,
                 title: Image.asset('assets/logo.png',height: 33,),
-                 bottom:  const TabBar(
+                 bottom:   TabBar(
                    labelColor: mirageBlue,
                    unselectedLabelColor: doveGrey,
-                   indicator: CurvedRectangleIndicator(
+                   indicator: const CurvedRectangleIndicator(
                      indicatorHeight: 4.0,
                      indicatorColor: ceruleanBlue,
                    ),
                    tabs: [
-                    Tab(child: Text('All Pokemon\'s',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),),
-                    Tab(child: Text('Favourites',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),),
+                    const Tab(child: Text('All Pokemon\'s',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),),
+                    Tab(child: Row(
+                      children:  [
+                      const  Text('Favourites',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),
+                        const SizedBox(width: 5,),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ceruleanBlue,
+                          ),
+                          child: const Center(
+                            child: Text('20',style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400
+                            )),
+                          ),
+                        )
+
+                      ],
+                    ),),
                    ],
                  ),
               ),
