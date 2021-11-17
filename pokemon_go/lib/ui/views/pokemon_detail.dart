@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
-import 'package:pokemon_go/ui/widgets/custom_linear_indicator.dart';
 import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
@@ -14,10 +13,49 @@ class PokeMonDetail extends StatefulWidget {
 }
 
 class _PokeMonDetailState extends State<PokeMonDetail> {
+
+  ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(false) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      floatingActionButton: ValueListenableBuilder(
+        valueListenable: showFavouriteButton,
+        builder: (BuildContext context,bool value, Widget? child) {
+          return value ? InkWell(
+            onTap: (){
+              showFavouriteButton.value = !value ;
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                  color: ceruleanBlue,
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+              ),
+              child: const Text('Mark as favourite',style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700
+              )),
+            ),
+          ) : InkWell(
+            onTap: (){
+              showFavouriteButton.value = !value ;
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                  color: periwinklePurple,
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+              ),
+              child: const Text('Remove from favourites',style: TextStyle(
+                  color: ceruleanBlue,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700
+              )),
+            ),
+          ) ;
+        },
+      ),
       appBar: AppBar(
         backgroundColor: ceruleanBlue.withOpacity(0.2),
         elevation: 0.0,
