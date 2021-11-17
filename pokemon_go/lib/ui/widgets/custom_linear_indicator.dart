@@ -11,7 +11,7 @@ class ProgressBar extends StatelessWidget {
   const ProgressBar(
       {Key? key,
         required this.current,
-        this.color = cerisePink})
+        required this.color })
       : super(key: key);
   @override
   Widget build(BuildContext context) {
