@@ -16,8 +16,6 @@ class PokemonItem extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(builder: (context) => const PokeMonDetail()));
       },
       child: Container(
-        height: 186,
-        width: 112,
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(bottomRight: Radius.circular(4.0),bottomLeft: Radius.circular(4.0))
@@ -27,10 +25,8 @@ class PokemonItem extends StatelessWidget {
           children:  [
             Container(
               height: 120,
-              width: 118,
               decoration: BoxDecoration(
-                color: ceruleanBlue.withOpacity(0.4),
-
+                color: ceruleanBlue.withOpacity(0.2),
               ),
               child: Center(child: Image.asset('assets/test_pokemon.png',height: 70,)),
             ),

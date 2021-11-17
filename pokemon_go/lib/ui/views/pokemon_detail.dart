@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/ui/widgets/custom_linear_indicator.dart';
+import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
   const PokeMonDetail({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: ceruleanBlue.withOpacity(0.2),
         elevation: 0.0,
@@ -118,7 +120,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
           Divider(
             color: doveGrey.withOpacity(0.1),thickness: 7,),
           const Padding(
-            padding:  EdgeInsets.symmetric(horizontal:20,vertical: 12),
+            padding:  EdgeInsets.only(left:20,top: 12),
             child:  Text('Base stats',style: TextStyle(
                 color: mirageBlue,
                 fontSize: 16,
@@ -128,32 +130,13 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
           Divider(
             color: doveGrey.withOpacity(0.1),thickness: 1,),
          const  SizedBox(height: 16,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal:20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: const [
-                    Text('HP',style: TextStyle(
-                        color: doveGrey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400
-                    ),),
-                    SizedBox(width: 5,),
-                    Text('20',style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600
-                    ),),
-                  ],
-                ),
-               const  SizedBox(height: 8,),
-
-                const ProgressBar(current: 20,)
-              ],
-            ),
-          )
+          const StatsItem(score: '20',title: 'HP',progressColor: cerisePink,),
+          const StatsItem(score: '30',title: 'Attack',progressColor: cerisePink,),
+          const StatsItem(score: '30',title: 'Defense',progressColor: cerisePink,),
+          const StatsItem(score: '40',title: 'Special Attack',progressColor: goldTipsYellow,),
+          const StatsItem(score: '40',title: 'Special Defense',progressColor: goldTipsYellow,),
+          const StatsItem(score: '10',title: 'Speed',progressColor: cerisePink,),
+          const StatsItem(score: '30',title: 'Avg. Power',progressColor: cerisePink,),
         ],
       ),
     );
