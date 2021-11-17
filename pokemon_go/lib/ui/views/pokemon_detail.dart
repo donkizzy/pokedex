@@ -74,6 +74,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
+
                 const Text('Bulbasaur',style: TextStyle(
                     color: mirageBlue,
                     fontSize: 32,
@@ -84,18 +85,21 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                     fontSize: 16,
                     fontWeight: FontWeight.w400
                 ),),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:  [
-                  const  Text('#001',style: TextStyle(
-                        color: mirageBlue,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400
-                    ),),
-                    Image.asset('assets/test_pokemon.png',height: 125,)
-                  ],
-                )
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:  [
+                    const  Text('#001',style: TextStyle(
+                          color: mirageBlue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400
+                      ),),
+                      Image.asset('assets/test_pokemon.png',height: 125,)
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 5.0,)
               ],
             ),
           ),

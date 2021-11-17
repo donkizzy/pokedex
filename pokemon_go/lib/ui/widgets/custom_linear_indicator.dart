@@ -5,7 +5,7 @@ import 'package:pokemon_go/shared/app_colors.dart';
 
 class ProgressBar extends StatelessWidget {
 
-  final double current;
+  final num current;
   final Color color;
 
   const ProgressBar(

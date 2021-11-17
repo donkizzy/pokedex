@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
+import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/views/pokemon_detail.dart';
 
 class PokemonItem extends StatelessWidget {
@@ -24,7 +25,7 @@ class PokemonItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
             Container(
-              height: 120,
+              height: height(context) /8,
               decoration: BoxDecoration(
                 color: ceruleanBlue.withOpacity(0.2),
               ),
@@ -46,14 +47,13 @@ class PokemonItem extends StatelessWidget {
                       color: mirageBlue,
                       fontSize: 14,
                       fontWeight: FontWeight.w600
-                  ),),
+                  ),overflow: TextOverflow.ellipsis,),
                   SizedBox(height: 10,),
                   Text('Grass, Poison',style: TextStyle(
                       color: doveGrey,
                       fontSize: 12,
                       fontWeight: FontWeight.w400
-                  ),),
-                  SizedBox(height: 5,),
+                  ),overflow: TextOverflow.ellipsis,),
                 ],
               ),
             )
