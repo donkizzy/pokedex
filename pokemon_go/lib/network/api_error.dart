@@ -33,11 +33,11 @@ class ApiError {
             errorDescription = 'Session Expired';
 
           } else if (dioError.response!.statusCode == 400) {
-            errorDescription = extractDescriptionFromResponse(dioError.response);
+            errorDescription = extractDescriptionFromResponse(dioError.response)!;
           }else if(dioError.response!.statusCode == 500){
             errorDescription = 'Internal Server Error';
           } else {
-            errorDescription = extractDescriptionFromResponse(error.response);
+            errorDescription = extractDescriptionFromResponse(error.response)!;
           }
           break;
         case DioErrorType.sendTimeout:
@@ -49,14 +49,14 @@ class ApiError {
     }
   }
 
-  String extractDescriptionFromResponse(Response? response) {
-    var message;
+  String? extractDescriptionFromResponse(Response? response) {
+    String? message;
     try {
       if (response?.data != null && response!.data['message'] != null) {
         message = response.data['message'];
 
         if(response.data['errors'] != null) {
-          message = message + '. ' + response.data['errors'].toString();
+          message = message! + '. ' + response.data['errors'].toString();
 
         }
 

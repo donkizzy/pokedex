@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 
 
 class AppInterceptor extends Interceptor {
@@ -20,7 +21,7 @@ class AppInterceptor extends Interceptor {
           response.statusCode! < 400) {
         response.statusCode = 200;
       } else if (response.statusCode == 401) {
-        print('status code 401 ==========================================');
+        debugPrint('status code 401 ==========================================');
       }
       return super.onResponse(response, handler);
     }
