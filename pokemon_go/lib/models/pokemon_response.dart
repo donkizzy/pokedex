@@ -19,8 +19,8 @@ class PokemonResponse extends BaseResponse {
   late final List<Results>? results;
 
   PokemonResponse.fromJson(Map<String, dynamic> json){
-    status = json['errorStatus'];
-    message = json['errorMessage'];
+    status = json['errorStatus'] ?? true;
+    message = json['errorMessage'] ?? '' ;
     count = json['count'];
     next = json['next'];
     previous = json['next'];

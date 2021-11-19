@@ -2,6 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_bloc.dart';
+import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_event.dart';
+import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_state.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
@@ -15,15 +19,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
-  late TabController _tabController;
 
+ late  FetchPokemonBloc _fetchPokemonBloc ;
   @override
   void initState() {
-    _tabController = TabController(
-      initialIndex: 0,
-      length: 2,
-      vsync: this,
-    );
+    _fetchPokemonBloc = FetchPokemonBloc();
+    _fetchPokemonBloc.add(const FetchPokemon(offset: 10));
     super.initState();
   }
 
@@ -81,24 +82,42 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           },
           body:  TabBarView(
             children: [
-             Container(
-                decoration: BoxDecoration(
-                  color: doveGrey.withOpacity(0.1),),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                    padding: const EdgeInsets.all(20),
-                    itemCount: 10,
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 12,
-                    childAspectRatio: width(context) /
-                        (height(context) - 100),
-                  ),
-                    itemBuilder: (BuildContext context,int index) {
-                    return  PokemonItem(key: UniqueKey(),) ;
-                    },),
-              ),
+             BlocBuilder(
+               bloc: _fetchPokemonBloc,
+               builder: (BuildContext context, state) {
+                 if(state is FetchPokemonLoading){
+
+                   return  const Text('loading');
+                 }
+                 if(state is FetchPokemonSuccessful){
+                   return Container(
+                     decoration: BoxDecoration(
+                       color: doveGrey.withOpacity(0.1),),
+                     child: GridView.builder(
+                       shrinkWrap: true,
+                       padding: const EdgeInsets.all(20),
+                       itemCount: 10,
+                       gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                         crossAxisCount: 3,
+                         crossAxisSpacing: 10,
+                         mainAxisSpacing: 12,
+                         childAspectRatio: width(context) /
+                             (height(context) - 100),
+                       ),
+                       itemBuilder: (BuildContext context,int index) {
+                         return  PokemonItem(key: UniqueKey(),) ;
+                       },),
+                   ) ;
+                 }
+
+                 if(state is FetchPokemonLoading){
+
+                   return  const Text('error');
+                 }
+
+                 return const SizedBox(height: 0,width: 0,);
+               },
+             ),
               Container(
                 decoration: BoxDecoration(
                   color: doveGrey.withOpacity(0.1),),
@@ -126,7 +145,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
   }
   }

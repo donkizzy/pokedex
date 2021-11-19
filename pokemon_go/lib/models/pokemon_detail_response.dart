@@ -23,8 +23,8 @@ class PokemonDetailResponse extends BaseResponse{
   late final int? weight;
 
   PokemonDetailResponse.fromJson(Map<String, dynamic> json){
-    status = json['errorStatus'];
-    message = json['errorMessage'];
+    status = json['errorStatus'] ?? true;
+    message = json['errorMessage'] ?? '';
     height = json['height'];
     id = json['id'];
     name = json['name'];
