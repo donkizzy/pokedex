@@ -1,23 +1,30 @@
 
-class PokemonDetailResponse {
+import 'package:pokemon_go/models/base_response.dart';
+
+class PokemonDetailResponse extends BaseResponse{
   PokemonDetailResponse({
-    required this.height,
-    required this.id,
-    required this.name,
-    required this.order,
-    required this.sprites,
-    required this.stats,
-    required this.weight,
-  });
-  late final int height;
-  late final int id;
-  late final String name;
-  late final int order;
-  late final Sprites sprites;
-  late final List<Stats> stats;
-  late final int weight;
+     this.height,
+     this.id,
+     this.name,
+     this.order,
+     this.sprites,
+     this.stats,
+     this.weight,
+    status,
+    message,
+  }): super(message: message, status: status);
+
+  late final int? height;
+  late final int? id;
+  late final String? name;
+  late final int? order;
+  late final Sprites? sprites;
+  late final List<Stats>? stats;
+  late final int? weight;
 
   PokemonDetailResponse.fromJson(Map<String, dynamic> json){
+    status = json['errorStatus'];
+    message = json['errorMessage'];
     height = json['height'];
     id = json['id'];
     name = json['name'];
@@ -29,12 +36,14 @@ class PokemonDetailResponse {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+    _data['errorStatus'] = status;
+    _data['errorMessage'] = message;
     _data['height'] = height;
     _data['id'] = id;
     _data['name'] = name;
     _data['order'] = order;
-    _data['sprites'] = sprites.toJson();
-    _data['stats'] = stats.map((e)=>e.toJson()).toList();
+    _data['sprites'] = sprites!.toJson();
+    _data['stats'] = stats!.map((e)=>e.toJson()).toList();
     _data['weight'] = weight;
     return _data;
   }

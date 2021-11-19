@@ -1,6 +1,7 @@
 
 
 import 'package:dio/dio.dart';
+import 'package:pokemon_go/models/pokemon_detail_response.dart';
 import 'package:pokemon_go/models/pokemon_response.dart';
 import 'package:pokemon_go/network/network_provider.dart';
 import 'package:pokemon_go/network/network_routes.dart';
@@ -9,16 +10,39 @@ class PokemonRepository {
 
   final NetworkProvider _networkProvider = NetworkProvider();
 
-  Future<PokemonResponse> fetchPokemonList(int offset) async{
-   late PokemonResponse pokemonResponse ;
+  Future<List<PokemonDetailResponse>> fetchPokemonList(int offset) async{
+    List<PokemonDetailResponse> pokemonDetailList = <PokemonDetailResponse>[] ;
     try{
-      var response = await _networkProvider.call(path: NetworkRoutes.deleteMessage(offset), method: RequestMethod.get);
+      var response = await _networkProvider.call(path: NetworkRoutes.fetchPokemon(offset), method: RequestMethod.get);
+
       if(response!.statusCode == 200){
-        pokemonResponse = PokemonResponse.fromJson(response.data);
+
+        PokemonResponse  pokemonResponse = PokemonResponse.fromJson(response.data);
+        pokemonResponse.status = true ;
+
+        for (var result in pokemonResponse.results!) {
+         var pokemon = await fetchPokemonDetail(result.url);
+         pokemonDetailList.add(pokemon);
+        }
+
+      }
+    }on DioError catch(e){
+      pokemonDetailList.last = PokemonDetailResponse(message: e.message, status: false) ;
+    }
+
+    return pokemonDetailList ;
+  }
+
+  Future<PokemonDetailResponse> fetchPokemonDetail(String url) async{
+   late PokemonDetailResponse pokemonResponse ;
+    try{
+      var response = await _networkProvider.call(path: url, method: RequestMethod.get);
+      if(response!.statusCode == 200){
+        pokemonResponse = PokemonDetailResponse.fromJson(response.data);
         pokemonResponse.status = true ;
       }
     }on DioError catch(e){
-      pokemonResponse = PokemonResponse(message: e.message, status: false) ;
+      pokemonResponse = PokemonDetailResponse(message: e.message, status: false) ;
     }
 
     return pokemonResponse ;
