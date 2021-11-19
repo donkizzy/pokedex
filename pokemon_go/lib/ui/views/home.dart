@@ -9,6 +9,7 @@ import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_state.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
+import 'package:pokemon_go/ui/widgets/pokemon_loader.dart';
 import 'package:pokemon_go/ui/widgets/rectangle_tab_indicator.dart';
 
 class Home extends StatefulWidget {
@@ -87,7 +88,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                builder: (BuildContext context, state) {
                  if(state is FetchPokemonLoading){
 
-                   return  const Text('loading');
+                   return  const PokemonLoader();
                  }
                  if(state is FetchPokemonSuccessful){
                    return Container(
