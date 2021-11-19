@@ -23,15 +23,12 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.1
   dio: ^4.0.3
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.3.3
+  flutter_bloc: ^8.0.0
   flutter_lints: ^1.0.4
   shimmer: ^2.0.0
-  super_enum:
-    git:
-      url: https://github.com/ride4sun/super_enum.git
-      ref: "0.7.0"
   very_good_analysis: ^2.4.0
 
 
@@ -40,15 +37,10 @@ dependencies:
 
 
 dev_dependencies:
-  build_runner: ^2.1.5
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  super_enum_generator:
-    git:
-      url: https://github.com/ride4sun/super_enum_generator.git
-      ref: "0.7.0"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
