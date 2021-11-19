@@ -8,11 +8,8 @@ class AppInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    //var token = SessionManager().authToken;
 
-    // if (token.isNotEmpty) {
-    //   options.headers.addAll({"Authorization": "Bearer " + token});
-    //   return super.onRequest(options, handler);
+       return super.onRequest(options, handler);
     }
 
     @override

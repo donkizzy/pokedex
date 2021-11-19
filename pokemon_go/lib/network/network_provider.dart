@@ -7,11 +7,8 @@ import 'package:pokemon_go/network/app_interceptor.dart';
 
 class NetworkProvider{
 
-  late String baseUrl;
-
   Dio _getDioInstance(){
     var dio=Dio(BaseOptions(
-        baseUrl:baseUrl,
         connectTimeout:30000,
         receiveTimeout:30000
     ));
@@ -34,7 +31,7 @@ class NetworkProvider{
 
       switch(method){
         case RequestMethod.get:
-          response= await _getDioInstance().get(path, queryParameters: queryParams);
+          response = await _getDioInstance().get(path, queryParameters: queryParams);
           break;
         case RequestMethod.post:
           response = await _getDioInstance()
