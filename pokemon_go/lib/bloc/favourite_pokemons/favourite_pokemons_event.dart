@@ -15,9 +15,10 @@ class FetchFavouritePokemon extends FavouritePokemonsEvent {
 
 class SaveFavouritePokemon extends FavouritePokemonsEvent {
 
-  const SaveFavouritePokemon();
+  final Pokemon pokemon ;
+  const SaveFavouritePokemon(this.pokemon);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [pokemon];
 
 }

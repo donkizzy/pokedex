@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pokemon_go/ui/views/splash.dart';
 
-void main() {
+void main() async{
+
+  // Initialize hive
+  await Hive.initFlutter();
+
+  // Opening the box
+  await Hive.openBox('pokemonBox');
   runApp(const MyApp( ));
 }
 

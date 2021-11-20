@@ -15,25 +15,30 @@ class FavouritePokemonsLoading extends FavouritePokemonsState {
 }
 
 class FavouritePokemonsFetchSuccessful extends FavouritePokemonsState {
-  final List<PokemonDetailResponse>  pokemonDetails;
-  final List<String> types ;
-  final List<int> averagePower ;
-  final List<Color> bgColor ;
 
-  const FavouritePokemonsFetchSuccessful(this.pokemonDetails, this.types, this.averagePower, this.bgColor) ;
+  final List<Pokemon> pokemon ;
+
+  const FavouritePokemonsFetchSuccessful(this.pokemon) ;
 
   @override
-  List<Object> get props => [pokemonDetails,types,averagePower];
+  List<Object> get props => [pokemon];
 }
 
 class FavouritePokemonsSaveSuccessful extends FavouritePokemonsState {
 
-  final PokemonDetailResponse  pokemonDetails;
-  final List<String> types ;
-  final List<int> averagePower ;
-  final List<Color> bgColor ;
+  final Pokemon pokemon ;
 
-  const FavouritePokemonsSaveSuccessful(this.pokemonDetails, this.types, this.averagePower, this.bgColor) ;
+  const FavouritePokemonsSaveSuccessful(this.pokemon) ;
+  @override
+  List<Object> get props => [pokemon];
+}
+
+class SaveFavouritePokemonsLoading extends FavouritePokemonsState {
+  @override
+  List<Object> get props => [];
+}
+
+class SaveFavouritePokemonsSuccessful extends FavouritePokemonsState {
   @override
   List<Object> get props => [];
 }
