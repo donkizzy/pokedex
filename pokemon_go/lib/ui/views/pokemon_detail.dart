@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/models/pokemon_detail_response.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
+import 'package:pokemon_go/shared/utilities.dart';
 import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
@@ -97,7 +99,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${pokeMonDetail.name}',
+                  pokeMonDetail.name!.toCapitalize(),
                   style: const TextStyle(
                       color: mirageBlue,
                       fontSize: 32,
@@ -121,10 +123,22 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
-                      Image.network(
-                        pokeMonDetail
-                            .sprites!.other.officialArtwork.frontDefault,
-                        height: 125,
+                      Hero(
+                        tag: pokeMonDetail.id.toString(),
+                        child: CachedNetworkImage(
+                          imageUrl:pokeMonDetail.sprites!.other.officialArtwork.frontDefault,
+                          height: 140,
+                          //alignment: Alignment.center,
+                          progressIndicatorBuilder: (context, url, downloadProgress) =>
+                              Center(
+                                child: CircularProgressIndicator(
+                                  value: downloadProgress.progress,strokeWidth: 2,
+                                  valueColor: const AlwaysStoppedAnimation<Color>(
+                                      ceruleanBlue),
+                                  backgroundColor: doveGrey,),
+                              ),
+                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                        ),
                       )
                     ],
                   ),
