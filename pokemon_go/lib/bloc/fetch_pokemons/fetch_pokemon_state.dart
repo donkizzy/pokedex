@@ -1,8 +1,7 @@
 
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:pokemon_go/models/pokemon_detail_response.dart';
+import 'package:pokemon_go/models/pokemon.dart';
 
 
 
@@ -21,15 +20,16 @@ class FetchPokemonLoading extends FetchPokemonState {
 }
 
 class FetchPokemonSuccessful extends FetchPokemonState {
-  final List<PokemonDetailResponse>  pokemonDetails;
-  final List<String> types ;
-  final List<int> averagePower ;
-  final List<Color> bgColor ;
 
-  const FetchPokemonSuccessful(this.pokemonDetails, this.types, this.averagePower, this.bgColor);
+  final List<Pokemon> pokemon ;
+
+  const FetchPokemonSuccessful(this.pokemon);
+
+
 
   @override
-  List<Object> get props => [pokemonDetails,types,averagePower];
+  List<Object?> get props => [pokemon];
+
 }
 
 class FetchPokemonError extends FetchPokemonState {

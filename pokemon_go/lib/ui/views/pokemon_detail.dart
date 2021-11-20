@@ -1,18 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokemon_go/bloc/favourite_pokemons/favourite_pokemons_bloc.dart';
+import 'package:pokemon_go/models/pokemon.dart';
 import 'package:pokemon_go/models/pokemon_detail_response.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/shared/utilities.dart';
 import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
-  final PokemonDetailResponse pokeMonDetail;
-  final String  types ;
-  final int  averagePower ;
-  final Color bgColor;
+ final Pokemon pokemon ;
 
-  const PokeMonDetail({Key? key, required this.pokeMonDetail, required this.types, required this.averagePower,required this.bgColor})
+  const PokeMonDetail({Key? key, required this.pokemon})
       : super(key: key);
 
   @override
@@ -22,17 +21,19 @@ class PokeMonDetail extends StatefulWidget {
 class _PokeMonDetailState extends State<PokeMonDetail> {
   late PokemonDetailResponse pokeMonDetail;
   late String  types ;
-  late int  averagePower ;
+  late num  averagePower ;
   late Color  bgColor ;
+  late FavouritePokemonsBloc _favouritePokemonsBloc ;
 
   ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(true);
 
   @override
   void initState() {
-    pokeMonDetail = widget.pokeMonDetail;
-    types = widget.types ;
-    averagePower = widget.averagePower ;
-    bgColor = widget.bgColor ;
+    pokeMonDetail = widget.pokemon.pokemonDetails;
+    types = widget.pokemon.types ;
+    averagePower = widget.pokemon.averagePower ;
+    bgColor = widget.pokemon.bgColor ;
+    _favouritePokemonsBloc = FavouritePokemonsBloc();
     super.initState();
   }
 
@@ -46,6 +47,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
               ? GestureDetector(
                   onTap: () {
                     showFavouriteButton.value = !value;
+                   // _favouritePokemonsBloc.add(SaveFavouritePokemon(widget.pokemon));
+                    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -210,10 +213,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(
-                      (pokeMonDetail.weight! /
-                              (pokeMonDetail.weight! * pokeMonDetail.weight!))
-                          .toStringAsFixed(2),
+                    Text( widget.pokemon.bmi,
                       style: const TextStyle(
                           color: mirageBlue,
                           fontSize: 14,
@@ -274,7 +274,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             progressColor: cerisePink,
           ),
            StatsItem(
-            score: double.parse((averagePower /6).toStringAsFixed(2)),
+            score: widget.pokemon.averagePower,
             title: 'Avg. Power',
             progressColor: cerisePink,
           ),

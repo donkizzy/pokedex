@@ -96,8 +96,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                        color: doveGrey.withOpacity(0.1),),
                      child: GridView.builder(
                        shrinkWrap: true,
-                       padding: const EdgeInsets.all(20),
-                       itemCount: state.pokemonDetails.length,
+                       padding: const EdgeInsets.all(12),
+                       itemCount: state.pokemon.length,
                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                          crossAxisCount: 3,
                          crossAxisSpacing: 10,
@@ -107,10 +107,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                        ),
                        itemBuilder: (BuildContext context,int index) {
                          return  PokemonItem(key: UniqueKey(),
-                           pokeMonDetail: state.pokemonDetails[index],
-                           averagePower: state.averagePower[index],
-                           types: state.types[index],
-                           bgColor: state.bgColor[index],
+                           pokemon: state.pokemon[index],
                          ) ;
                        },),
                    ) ;
@@ -138,7 +135,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                       child: GridView.builder(
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(20),
-                        itemCount: state.pokemonDetails.length,
+                        itemCount: state.pokemon.length,
                         gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,
@@ -148,10 +145,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                         ),
                         itemBuilder: (BuildContext context,int index) {
                           return  PokemonItem(key: UniqueKey(),
-                            pokeMonDetail: state.pokemonDetails[index],
-                          averagePower: state.averagePower[index],
-                          types: state.types[index],
-                            bgColor: state.bgColor[index],
+                            pokemon: state.pokemon[index],
                           ) ;
                         },),
                     ) ;
