@@ -13,7 +13,7 @@ class PokemonRepository {
   Future<List<PokemonDetailResponse>> fetchPokemonList({int? offset}) async{
     List<PokemonDetailResponse> pokemonDetailList = <PokemonDetailResponse>[] ;
     try{
-       const String baseUrl = 'https://pokeapi.co/api/v2/pokemon?offset=10&limit=20';
+       const String baseUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20';
 
       var response = await _networkProvider.call(path: baseUrl, method: RequestMethod.get);
 

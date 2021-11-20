@@ -1,17 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokemon_go/models/pokemon_detail_response.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
-  const PokeMonDetail({Key? key}) : super(key: key);
+  final PokemonDetailResponse pokeMonDetail;
+  final String  types ;
+  final int  averagePower ;
+
+  const PokeMonDetail({Key? key, required this.pokeMonDetail, required this.types, required this.averagePower})
+      : super(key: key);
 
   @override
   _PokeMonDetailState createState() => _PokeMonDetailState();
 }
 
 class _PokeMonDetailState extends State<PokeMonDetail> {
+  late PokemonDetailResponse pokeMonDetail;
+  late String  types ;
+  late int  averagePower ;
+
   ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(true);
+
+  @override
+  void initState() {
+    pokeMonDetail = widget.pokeMonDetail;
+    types = widget.types ;
+    averagePower = widget.averagePower ;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +96,15 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Bulbasaur',
-                  style: TextStyle(
+                Text(
+                  '${pokeMonDetail.name}',
+                  style: const TextStyle(
                       color: mirageBlue,
                       fontSize: 32,
                       fontWeight: FontWeight.w700),
                 ),
-                const Text(
-                  'Grass, Poison',
-                  style: TextStyle(
+                 Text( types,
+                  style: const TextStyle(
                       color: mirageBlue,
                       fontSize: 16,
                       fontWeight: FontWeight.w400),
@@ -97,15 +114,16 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '#001',
-                        style: TextStyle(
+                      Text(
+                        '#00${pokeMonDetail.id}',
+                        style: const TextStyle(
                             color: mirageBlue,
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
-                      Image.asset(
-                        'assets/test_pokemon.png',
+                      Image.network(
+                        pokeMonDetail
+                            .sprites!.other.officialArtwork.frontDefault,
                         height: 125,
                       )
                     ],
@@ -123,8 +141,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Height',
                       style: TextStyle(
                           color: doveGrey,
@@ -132,8 +150,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '69',
-                      style: TextStyle(
+                      '${pokeMonDetail.height}',
+                      style: const TextStyle(
                           color: mirageBlue,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
@@ -145,8 +163,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Weight',
                       style: TextStyle(
                           color: doveGrey,
@@ -154,8 +172,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '9',
-                      style: TextStyle(
+                      '${pokeMonDetail.weight}',
+                      style: const TextStyle(
                           color: mirageBlue,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
@@ -167,8 +185,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'BMI',
                       style: TextStyle(
                           color: doveGrey,
@@ -176,8 +194,10 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '69.2',
-                      style: TextStyle(
+                      (pokeMonDetail.weight! /
+                              (pokeMonDetail.weight! * pokeMonDetail.weight!))
+                          .toStringAsFixed(2),
+                      style: const TextStyle(
                           color: mirageBlue,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
@@ -206,38 +226,38 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             color: doveGrey.withOpacity(0.1),
             thickness: 1,
           ),
-          const StatsItem(
-            score: 20,
+          StatsItem(
+            score: pokeMonDetail.stats![0].baseStat,
             title: 'HP',
             progressColor: cerisePink,
           ),
-          const StatsItem(
-            score: 3,
+          StatsItem(
+            score: pokeMonDetail.stats![1].baseStat,
             title: 'Attack',
             progressColor: cerisePink,
           ),
-          const StatsItem(
-            score: 30,
+          StatsItem(
+            score: pokeMonDetail.stats![2].baseStat,
             title: 'Defense',
             progressColor: cerisePink,
           ),
-          const StatsItem(
-            score: 4,
+          StatsItem(
+            score: pokeMonDetail.stats![3].baseStat,
             title: 'Special Attack',
             progressColor: goldTipsYellow,
           ),
-          const StatsItem(
-            score: 40,
+          StatsItem(
+            score: pokeMonDetail.stats![4].baseStat,
             title: 'Special Defense',
             progressColor: goldTipsYellow,
           ),
-          const StatsItem(
-            score: 10,
+          StatsItem(
+            score: pokeMonDetail.stats![5].baseStat,
             title: 'Speed',
             progressColor: cerisePink,
           ),
-          const StatsItem(
-            score: 80,
+           StatsItem(
+            score: double.parse((averagePower /6).toStringAsFixed(2)),
             title: 'Avg. Power',
             progressColor: cerisePink,
           ),
@@ -245,4 +265,6 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
       ),
     );
   }
+
+
 }

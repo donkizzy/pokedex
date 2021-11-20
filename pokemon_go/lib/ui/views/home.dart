@@ -97,7 +97,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                      child: GridView.builder(
                        shrinkWrap: true,
                        padding: const EdgeInsets.all(20),
-                       itemCount: 10,
+                       itemCount: state.pokemonDetails.length,
                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                          crossAxisCount: 3,
                          crossAxisSpacing: 10,
@@ -106,36 +106,61 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                              (height(context) - 100),
                        ),
                        itemBuilder: (BuildContext context,int index) {
-                         return  PokemonItem(key: UniqueKey(),) ;
+                         return  PokemonItem(key: UniqueKey(),
+                           pokeMonDetail: state.pokemonDetails[index],
+                           averagePower: state.averagePower[index],
+                           types: state.types[index],
+                         ) ;
                        },),
                    ) ;
                  }
 
-                 if(state is FetchPokemonLoading){
+                 if(state is FetchPokemonError){
 
-                   return  const Text('error');
+                   return   Text('${state.error}');
                  }
 
                  return const SizedBox(height: 0,width: 0,);
                },
              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: doveGrey.withOpacity(0.1),),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                    padding: const EdgeInsets.all(20),
-                    itemCount: 10,
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: width(context) /
-                        (height(context) - 100),
-                  ),
-                    itemBuilder: (BuildContext context,int index) {
-                    return PokemonItem(key: UniqueKey(),);
-                    },),
+              BlocBuilder(
+                bloc: _fetchPokemonBloc,
+                builder: (BuildContext context, state) {
+                  if(state is FetchPokemonLoading){
+
+                    return  const PokemonLoader();
+                  }
+                  if(state is FetchPokemonSuccessful){
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: doveGrey.withOpacity(0.1),),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        itemCount: state.pokemonDetails.length,
+                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: width(context) /
+                              (height(context) - 100),
+                        ),
+                        itemBuilder: (BuildContext context,int index) {
+                          return  PokemonItem(key: UniqueKey(),
+                            pokeMonDetail: state.pokemonDetails[index],
+                          averagePower: state.averagePower[index],
+                          types: state.types[index],) ;
+                        },),
+                    ) ;
+                  }
+
+                  if(state is FetchPokemonError){
+
+                    return   Text('${state.error}');
+                  }
+
+                  return const SizedBox(height: 0,width: 0,);
+                },
               ),
             ],
           ),

@@ -10,6 +10,7 @@ class PokemonDetailResponse extends BaseResponse{
      this.sprites,
      this.stats,
      this.weight,
+     this.types,
     status,
     message,
   }): super(message: message, status: status);
@@ -20,6 +21,7 @@ class PokemonDetailResponse extends BaseResponse{
   late final int? order;
   late final Sprites? sprites;
   late final List<Stats>? stats;
+  late final List<Types>? types;
   late final int? weight;
 
   PokemonDetailResponse.fromJson(Map<String, dynamic> json){
@@ -31,6 +33,7 @@ class PokemonDetailResponse extends BaseResponse{
     order = json['order'];
     sprites = Sprites.fromJson(json['sprites']);
     stats = List.from(json['stats']).map((e)=>Stats.fromJson(e)).toList();
+    types = List.from(json['types']).map((e)=>Types.fromJson(e)).toList();
     weight = json['weight'];
   }
 
@@ -44,6 +47,7 @@ class PokemonDetailResponse extends BaseResponse{
     _data['order'] = order;
     _data['sprites'] = sprites!.toJson();
     _data['stats'] = stats!.map((e)=>e.toJson()).toList();
+    _data['types'] = types!.map((e)=>e.toJson()).toList();
     _data['weight'] = weight;
     return _data;
   }
@@ -134,6 +138,49 @@ class Stat {
   late final String url;
 
   Stat.fromJson(Map<String, dynamic> json){
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Types {
+  Types({
+    required this.slot,
+    required this.type,
+  });
+  late final int slot;
+  late final Type type;
+
+  Types.fromJson(Map<String, dynamic> json){
+    slot = json['slot'];
+    type = Type.fromJson(json['type']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['slot'] = slot;
+    _data['type'] = type.toJson();
+    return _data;
+  }
+}
+
+class Type {
+  Type({
+    required this.name,
+    required this.url,
+  });
+
+  late final String name;
+  late final String url;
+
+  Type.fromJson(Map<String, dynamic> json){
     name = json['name'];
     url = json['url'];
   }
