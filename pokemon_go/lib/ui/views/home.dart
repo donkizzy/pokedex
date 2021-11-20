@@ -3,9 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_bloc.dart';
-import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_event.dart';
-import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_state.dart';
+import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_bloc.dart';
+import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_event.dart';
+import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_state.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
