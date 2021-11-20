@@ -21,11 +21,13 @@ class FetchPokemonLoading extends FetchPokemonState {
 
 class FetchPokemonSuccessful extends FetchPokemonState {
   final List<PokemonDetailResponse>  pokemonDetails;
+  final List<String> types ;
+  final List<int> averagePower ;
 
-  const FetchPokemonSuccessful(this.pokemonDetails);
+  const FetchPokemonSuccessful(this.pokemonDetails, this.types, this.averagePower);
 
   @override
-  List<Object> get props => [pokemonDetails];
+  List<Object> get props => [pokemonDetails,types,averagePower];
 }
 
 class FetchPokemonError extends FetchPokemonState {
