@@ -25,7 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
   @override
   void initState() {
     _fetchPokemonBloc = FetchPokemonBloc();
-    _fetchPokemonBloc.add(const FetchPokemon(offset: 10));
+    _fetchPokemonBloc.add(const FetchPokemon());
     super.initState();
   }
 

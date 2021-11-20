@@ -13,11 +13,11 @@ abstract class FetchPokemonEvent extends Equatable {
 }
 
 class FetchPokemon extends FetchPokemonEvent {
-  final int? offset;
 
-  const FetchPokemon({ this.offset});
+
+  const FetchPokemon();
 
   @override
-  List<Object?> get props => [offset];
+  List<Object?> get props => [];
 
 }

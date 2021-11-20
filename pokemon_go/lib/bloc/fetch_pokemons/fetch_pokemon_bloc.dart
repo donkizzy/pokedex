@@ -14,7 +14,7 @@ class FetchPokemonBloc extends Bloc<FetchPokemonEvent, FetchPokemonState> {
       if (event is FetchPokemon) {
         try {
           emit(FetchPokemonLoading());
-          var response = await _pokemonRepository.fetchPokemonList(offset:  const FetchPokemon().offset);
+          var response = await _pokemonRepository.fetchPokemonList();
 
           if (response.last.status) {
 
