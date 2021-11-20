@@ -10,8 +10,9 @@ class PokeMonDetail extends StatefulWidget {
   final PokemonDetailResponse pokeMonDetail;
   final String  types ;
   final int  averagePower ;
+  final Color bgColor;
 
-  const PokeMonDetail({Key? key, required this.pokeMonDetail, required this.types, required this.averagePower})
+  const PokeMonDetail({Key? key, required this.pokeMonDetail, required this.types, required this.averagePower,required this.bgColor})
       : super(key: key);
 
   @override
@@ -22,6 +23,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
   late PokemonDetailResponse pokeMonDetail;
   late String  types ;
   late int  averagePower ;
+  late Color  bgColor ;
 
   ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(true);
 
@@ -30,6 +32,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
     pokeMonDetail = widget.pokeMonDetail;
     types = widget.types ;
     averagePower = widget.averagePower ;
+    bgColor = widget.bgColor ;
     super.initState();
   }
 
@@ -75,7 +78,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
         },
       ),
       appBar: AppBar(
-        backgroundColor: ceruleanBlue.withOpacity(0.2),
+        backgroundColor: bgColor.withOpacity(0.2),
         elevation: 0.0,
         iconTheme: const IconThemeData(
           color: Colors.black,
@@ -87,14 +90,14 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             height: 200,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-                color: ceruleanBlue.withOpacity(0.2),
+                color:  bgColor.withOpacity(0.2),
                 image: DecorationImage(
                     image: const AssetImage(
                       'assets/pokemon_bg.png',
                     ),
                     alignment: Alignment.centerRight,
                     colorFilter: ColorFilter.mode(
-                        ceruleanBlue.withOpacity(0.6), BlendMode.srcATop))),
+                        bgColor.withOpacity(0.4), BlendMode.srcATop))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

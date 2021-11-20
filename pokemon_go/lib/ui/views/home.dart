@@ -110,6 +110,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                            pokeMonDetail: state.pokemonDetails[index],
                            averagePower: state.averagePower[index],
                            types: state.types[index],
+                           bgColor: state.bgColor[index],
                          ) ;
                        },),
                    ) ;
@@ -149,7 +150,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                           return  PokemonItem(key: UniqueKey(),
                             pokeMonDetail: state.pokemonDetails[index],
                           averagePower: state.averagePower[index],
-                          types: state.types[index],) ;
+                          types: state.types[index],
+                            bgColor: state.bgColor[index],
+                          ) ;
                         },),
                     ) ;
                   }

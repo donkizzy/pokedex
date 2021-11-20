@@ -1,13 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_event.dart';
 import 'package:pokemon_go/bloc/FetchPokemons/fetch_pokemon_state.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:pokemon_go/repository/pokemon_repository.dart';
 import 'package:pokemon_go/shared/utilities.dart';
 
 class FetchPokemonBloc extends Bloc<FetchPokemonEvent, FetchPokemonState> {
   final PokemonRepository _pokemonRepository = PokemonRepository();
 
-  FetchPokemonBloc() : super(FetchPokemonInitial()) {
+  FetchPokemonBloc() : super( FetchPokemonInitial()) {
     on<FetchPokemonEvent>((event, emit) async {
       if (event is FetchPokemon) {
         try {
@@ -18,6 +20,7 @@ class FetchPokemonBloc extends Bloc<FetchPokemonEvent, FetchPokemonState> {
 
             List<String> types = <String>[] ;
             List<int> stats = <int>[] ;
+            List<Color> bgColor = <Color>[];
 
             //loop through the list to modify the data
             for (var e in response) {
@@ -28,13 +31,20 @@ class FetchPokemonBloc extends Bloc<FetchPokemonEvent, FetchPokemonState> {
               //loop through the types object to get the types data and concatenate it
               var typesArray = e.types!.map((e) => e.type.name.toCapitalize());
 
+             // loop through to get the dominant color in an image
+              PaletteGenerator palette = await PaletteGenerator.fromImageProvider(
+                  NetworkImage(e.sprites!.other.officialArtwork.frontDefault),
+              );
+              palette.dominantColor ;
+
               //add items to the list
               types.add(typesArray.join(','));
               stats.add(statArray);
+              bgColor.add(palette.dominantColor!.color);
 
             }
 
-            emit(FetchPokemonSuccessful(response,types,stats));
+            emit(FetchPokemonSuccessful(response,types,stats,bgColor));
 
           } else {
 

@@ -14,13 +14,14 @@ class PokemonItem extends StatelessWidget {
   final PokemonDetailResponse pokeMonDetail ;
   final String  types ;
   final int  averagePower ;
-  const PokemonItem({Key? key, required this.pokeMonDetail,required this.types,required this.averagePower}) : super(key: key);
+  final Color bgColor;
+  const PokemonItem({Key? key, required this.pokeMonDetail,required this.types,required this.averagePower,required this.bgColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>  PokeMonDetail(pokeMonDetail: pokeMonDetail,types: types,averagePower: averagePower,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>  PokeMonDetail(pokeMonDetail: pokeMonDetail,types: types,averagePower: averagePower,bgColor: bgColor,)));
       },
       child: Hero(
         tag: pokeMonDetail.id.toString(),
@@ -35,7 +36,7 @@ class PokemonItem extends StatelessWidget {
               Container(
                 height: height(context) /8,
                 decoration: BoxDecoration(
-                  color: ceruleanBlue.withOpacity(0.2),
+                  color: bgColor.withOpacity(0.2),
                 ),
                 child: Center(
                   child: CachedNetworkImage(
