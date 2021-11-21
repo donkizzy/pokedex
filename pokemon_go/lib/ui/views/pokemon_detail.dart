@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_go/bloc/favourite_pokemons/favourite_pokemons_bloc.dart';
+import 'package:pokemon_go/bloc/pokemon_store/pokemon_store_bloc.dart';
 import 'package:pokemon_go/models/pokemon.dart';
 import 'package:pokemon_go/models/pokemon_detail_response.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
@@ -9,10 +10,9 @@ import 'package:pokemon_go/shared/utilities.dart';
 import 'package:pokemon_go/ui/widgets/stat_item.dart';
 
 class PokeMonDetail extends StatefulWidget {
- final Pokemon pokemon ;
+  final Pokemon pokemon;
 
-  const PokeMonDetail({Key? key, required this.pokemon})
-      : super(key: key);
+  const PokeMonDetail({Key? key, required this.pokemon}) : super(key: key);
 
   @override
   _PokeMonDetailState createState() => _PokeMonDetailState();
@@ -20,64 +20,86 @@ class PokeMonDetail extends StatefulWidget {
 
 class _PokeMonDetailState extends State<PokeMonDetail> {
   late PokemonDetailResponse pokeMonDetail;
-  late String  types ;
-  late num  averagePower ;
-  late Color  bgColor ;
-  late FavouritePokemonsBloc _favouritePokemonsBloc ;
+  late String types;
 
-  ValueNotifier<bool> showFavouriteButton = ValueNotifier<bool>(true);
+  late num averagePower;
+
+  late Color bgColor;
+
+  late FavouritePokemonsBloc _favouritePokemonsBloc;
+
+  late PokemonStoreBloc _checkPokemon ;
+
 
   @override
   void initState() {
     pokeMonDetail = widget.pokemon.pokemonDetails;
-    types = widget.pokemon.types ;
-    averagePower = widget.pokemon.averagePower ;
-    bgColor = widget.pokemon.bgColor ;
-    _favouritePokemonsBloc = FavouritePokemonsBloc();
+    types = widget.pokemon.types;
+    averagePower = widget.pokemon.averagePower;
+    bgColor = widget.pokemon.bgColor;
+    _checkPokemon = PokemonStoreBloc();
+    _favouritePokemonsBloc = BlocProvider.of<FavouritePokemonsBloc>(context);
+    _checkPokemon.add(CheckFavouritePokemon(pokeMonDetail.id.toString()));
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: ValueListenableBuilder(
-        valueListenable: showFavouriteButton,
-        builder: (BuildContext context, bool value, Widget? child) {
-          return value
-              ? GestureDetector(
-                  onTap: () {
-                    showFavouriteButton.value = !value;
-                   // _favouritePokemonsBloc.add(SaveFavouritePokemon(widget.pokemon));
-                    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                        color: ceruleanBlue,
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: const Text('Mark as favourite',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700)),
-                  ),
-                )
-              : InkWell(
-                  onTap: () {
-                    showFavouriteButton.value = !value;
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                        color: periwinklePurple,
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: const Text('Remove from favourites',
-                        style: TextStyle(
-                            color: ceruleanBlue,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700)),
-                  ),
-                );
+      floatingActionButton:
+          BlocConsumer(
+        bloc: _checkPokemon,
+        listener: (context, state) {
+          if(state is SaveFavouritePokemonsSuccessful){
+           _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+          }
+          if(state is RemoveFavouritePokemon){
+            _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+          }
+          if(state is CheckFavouritePokemonsSuccessful){
+            _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+          }
+        },
+        builder: (context, state) {
+          if (state is CheckFavouritePokemonsSuccessful) {
+            return !state.pokemonExist
+                ? GestureDetector(
+                    onTap: () {
+                      _checkPokemon
+                          .add(SaveFavouritePokemon(widget.pokemon));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                          color: ceruleanBlue,
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: const Text('Mark as favourite',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700)),
+                    ),
+                  )
+                : InkWell(
+                    onTap: () {
+                      _checkPokemon
+                          .add(RemoveFavouritePokemon(widget.pokemon.pokemonDetails.id.toString()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                          color: periwinklePurple,
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: const Text('Remove from favourites',
+                          style: TextStyle(
+                              color: ceruleanBlue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700)),
+                    ),
+                  );
+          }
+          return const SizedBox();
         },
       ),
       appBar: AppBar(
@@ -93,7 +115,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             height: 200,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-                color:  bgColor.withOpacity(0.2),
+                color: bgColor.withOpacity(0.2),
                 image: DecorationImage(
                     image: const AssetImage(
                       'assets/pokemon_bg.png',
@@ -111,7 +133,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                       fontSize: 32,
                       fontWeight: FontWeight.w700),
                 ),
-                 Text( types,
+                Text(
+                  types,
                   style: const TextStyle(
                       color: mirageBlue,
                       fontSize: 16,
@@ -132,18 +155,22 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                       Hero(
                         tag: pokeMonDetail.id.toString(),
                         child: CachedNetworkImage(
-                          imageUrl:pokeMonDetail.sprites!.other.officialArtwork.frontDefault,
+                          imageUrl: pokeMonDetail
+                              .sprites!.other.officialArtwork.frontDefault,
                           height: 140,
                           //alignment: Alignment.center,
-                          progressIndicatorBuilder: (context, url, downloadProgress) =>
-                              Center(
-                                child: CircularProgressIndicator(
-                                  value: downloadProgress.progress,strokeWidth: 2,
-                                  valueColor: const AlwaysStoppedAnimation<Color>(
-                                      ceruleanBlue),
-                                  backgroundColor: doveGrey,),
-                              ),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                              strokeWidth: 2,
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  ceruleanBlue),
+                              backgroundColor: doveGrey,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
                       )
                     ],
@@ -213,7 +240,8 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text( widget.pokemon.bmi,
+                    Text(
+                      widget.pokemon.bmi,
                       style: const TextStyle(
                           color: mirageBlue,
                           fontSize: 14,
@@ -273,7 +301,7 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
             title: 'Speed',
             progressColor: cerisePink,
           ),
-           StatsItem(
+          StatsItem(
             score: widget.pokemon.averagePower,
             title: 'Avg. Power',
             progressColor: cerisePink,
@@ -282,6 +310,4 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
       ),
     );
   }
-
-
 }

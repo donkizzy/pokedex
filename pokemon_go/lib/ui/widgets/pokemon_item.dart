@@ -81,7 +81,7 @@ class PokemonItem extends StatelessWidget {
                             fontWeight: FontWeight.w400
                         ),overflow: TextOverflow.ellipsis,),
                       ),
-                      const   SizedBox(height: 10,),
+                      //const   SizedBox(height: 10,),
                     ],
                   ),
                 ),
