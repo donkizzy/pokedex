@@ -31,9 +31,9 @@ class PokemonDetailResponse extends BaseResponse{
     id = json['id'];
     name = json['name'];
     order = json['order'];
-    sprites = Sprites.fromJson(json['sprites']);
-    stats = List.from(json['stats']).map((e)=>Stats.fromJson(e)).toList();
-    types = List.from(json['types']).map((e)=>Types.fromJson(e)).toList();
+    sprites = Sprites.fromJson(Map<String, dynamic>.from(json['sprites']));
+    stats = List.from(json['stats']).map((e)=>Stats.fromJson(Map<String, dynamic>.from(e))).toList();
+    types = List.from(json['types']).map((e)=>Types.fromJson(Map<String, dynamic>.from(e))).toList();
     weight = json['weight'];
   }
 
@@ -60,7 +60,7 @@ class Sprites {
   late final Other other;
 
   Sprites.fromJson(Map<String, dynamic> json){
-    other = Other.fromJson(json['other']);
+    other = Other.fromJson(Map<String, dynamic>.from(json['other']));
   }
 
   Map<String, dynamic> toJson() {
@@ -77,7 +77,7 @@ class Other {
   late final OfficialArtwork officialArtwork;
 
   Other.fromJson(Map<String, dynamic> json){
-    officialArtwork = OfficialArtwork.fromJson(json['official-artwork']);
+    officialArtwork = OfficialArtwork.fromJson(Map<String, dynamic>.from(json['official-artwork']));
   }
 
   Map<String, dynamic> toJson() {
@@ -117,7 +117,7 @@ class Stats {
   Stats.fromJson(Map<String, dynamic> json){
     baseStat = json['base_stat'];
     effort = json['effort'];
-    stat = Stat.fromJson(json['stat']);
+    stat = Stat.fromJson(Map<String, dynamic>.from(json['stat']));
   }
 
   Map<String, dynamic> toJson() {
@@ -160,7 +160,7 @@ class Types {
 
   Types.fromJson(Map<String, dynamic> json){
     slot = json['slot'];
-    type = Type.fromJson(json['type']);
+    type = Type.fromJson(Map<String, dynamic>.from(json['type']));
   }
 
   Map<String, dynamic> toJson() {
