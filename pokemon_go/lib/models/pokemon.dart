@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:pokemon_go/models/pokemon_detail_response.dart';
-import 'package:pokemon_go/shared/utilities.dart';
 
 class Pokemon {
 
@@ -21,7 +20,7 @@ class Pokemon {
 
   factory Pokemon.fromJson(Map<String, dynamic> json) => Pokemon(
     types: json['types'],
-    pokemonDetails: PokemonDetailResponse.fromJson(json['pokemonDetails']),
+    pokemonDetails: PokemonDetailResponse.fromJson(Map<String, dynamic>.from(json['pokemonDetails'])),
     averagePower: json['averagePower'],
     bmi: json['bmi'],
     bgColor: Color(json['bgColor'])

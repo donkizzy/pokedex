@@ -1,7 +1,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pokemon_go/models/pokemon.dart';
 
@@ -48,6 +47,21 @@ class FavouritePokemonsBloc extends Bloc<FavouritePokemonsEvent, FavouritePokemo
           emit( FavouritePokemonsError(e.toString()));
         }
 
+      }
+
+      if(event is CheckFavouritePokemon){
+        var box = Hive.box('pokemonBox');
+        var pokemonExist = box.get(event.id);
+        if(pokemonExist == null){
+          emit (const CheckFavouritePokemonsSuccessful(false));
+        }else {
+          emit (const CheckFavouritePokemonsSuccessful(true)) ;
+        }
+      }
+      if(event is RemoveFavouritePokemon){
+        var box = Hive.box('pokemonBox');
+        box.delete(event.id);
+        emit(const RemoveFavouritePokemonsSuccessful());
       }
     });
   }

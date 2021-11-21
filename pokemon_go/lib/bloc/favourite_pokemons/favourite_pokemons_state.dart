@@ -43,6 +43,21 @@ class SaveFavouritePokemonsSuccessful extends FavouritePokemonsState {
   List<Object> get props => [];
 }
 
+class CheckFavouritePokemonsSuccessful extends FavouritePokemonsState {
+  final bool pokemonExist ;
+
+ const CheckFavouritePokemonsSuccessful(this.pokemonExist);
+  @override
+  List<Object> get props => [pokemonExist];
+}
+
+class RemoveFavouritePokemonsSuccessful extends FavouritePokemonsState {
+
+ const RemoveFavouritePokemonsSuccessful();
+  @override
+  List<Object> get props => [];
+}
+
 class FavouritePokemonsError extends FavouritePokemonsState {
 
   final String? error;
