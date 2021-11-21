@@ -25,8 +25,8 @@ class AllPokemon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: doveGrey.withOpacity(0.1),
+      decoration: const BoxDecoration(
+        color: mecuryGrey,
       ),
       child: LazyLoadScrollView(
         onEndOfPage: () {

@@ -67,7 +67,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   tabs: [
                     const Tab(
                       child: Text(
-                        'All Pokemon\'s',
+                        'All Pokemons',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
@@ -163,8 +163,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
                   if (state is FavouritePokemonsFetchSuccessful) {
                     return Container(
-                      decoration: BoxDecoration(
-                        color: doveGrey.withOpacity(0.1),
+                      decoration: const BoxDecoration(
+                        color: mecuryGrey,
                       ),
                       child: GridView.builder(
                         shrinkWrap: true,
@@ -211,15 +211,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 },
                 listener: (BuildContext context, Object? state) {
-                  if (state is SaveFavouritePokemonsSuccessful) {
-                    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
-                  }
-                  if (state is RemoveFavouritePokemonsSuccessful) {
-                    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
-                  }
-                  if (state is CheckFavouritePokemonsSuccessful) {
-                    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
-                  }
+
                 },
               ),
             ],

@@ -11,22 +11,6 @@ class FavouritePokemonsBloc extends Bloc<FavouritePokemonsEvent, FavouritePokemo
   FavouritePokemonsBloc() : super(FavouritePokemonsInitial()) {
     on<FavouritePokemonsEvent>((event, emit)async {
 
-      if (event is SaveFavouritePokemon){
-
-       try{
-         emit(SaveFavouritePokemonsLoading());
-
-         var box = Hive.box('pokemonBox');
-
-         box.put(event.pokemon.pokemonDetails.id.toString(), event.pokemon.toJson());
-
-         emit(SaveFavouritePokemonsSuccessful());
-
-       }catch(e){
-         emit( FavouritePokemonsError(e.toString()));
-       }
-      }
-
       if (event is FetchFavouritePokemon){
 
         try{
@@ -49,20 +33,6 @@ class FavouritePokemonsBloc extends Bloc<FavouritePokemonsEvent, FavouritePokemo
 
       }
 
-      if(event is CheckFavouritePokemon){
-        var box = Hive.box('pokemonBox');
-        var pokemonExist = box.get(event.id);
-        if(pokemonExist == null){
-          emit (const CheckFavouritePokemonsSuccessful(false));
-        }else {
-          emit (const CheckFavouritePokemonsSuccessful(true)) ;
-        }
-      }
-      if(event is RemoveFavouritePokemon){
-        var box = Hive.box('pokemonBox');
-        box.delete(event.id);
-        emit(const RemoveFavouritePokemonsSuccessful());
-      }
     });
   }
 }

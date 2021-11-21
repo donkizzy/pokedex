@@ -24,40 +24,6 @@ class FavouritePokemonsFetchSuccessful extends FavouritePokemonsState {
   List<Object> get props => [pokemon];
 }
 
-class FavouritePokemonsSaveSuccessful extends FavouritePokemonsState {
-
-  final Pokemon pokemon ;
-
-  const FavouritePokemonsSaveSuccessful(this.pokemon) ;
-  @override
-  List<Object> get props => [pokemon];
-}
-
-class SaveFavouritePokemonsLoading extends FavouritePokemonsState {
-  @override
-  List<Object> get props => [];
-}
-
-class SaveFavouritePokemonsSuccessful extends FavouritePokemonsState {
-  @override
-  List<Object> get props => [];
-}
-
-class CheckFavouritePokemonsSuccessful extends FavouritePokemonsState {
-  final bool pokemonExist ;
-
- const CheckFavouritePokemonsSuccessful(this.pokemonExist);
-  @override
-  List<Object> get props => [pokemonExist];
-}
-
-class RemoveFavouritePokemonsSuccessful extends FavouritePokemonsState {
-
- const RemoveFavouritePokemonsSuccessful();
-  @override
-  List<Object> get props => [];
-}
-
 class FavouritePokemonsError extends FavouritePokemonsState {
 
   final String? error;
