@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pokemon_go/bloc/favourite_pokemons/favourite_pokemons_bloc.dart';
 import 'package:pokemon_go/ui/views/splash.dart';
 
-void main() async{
-
+void main() async {
   // Initialize hive
   await Hive.initFlutter();
 
   // Opening the box
   await Hive.openBox('pokemonBox');
-  runApp(const MyApp( ));
+  await Hive.openBox('nextUrl');
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,22 +20,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        fontFamily: 'NotoSans'
+    return BlocProvider(
+      create: (context) => FavouritePokemonsBloc(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+            primarySwatch: Colors.blue,
+            fontFamily: 'NotoSans'
+        ),
+        home: const Splash(),
       ),
-      home: const Splash(),
     );
   }
 }

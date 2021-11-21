@@ -32,6 +32,24 @@ class FetchPokemonSuccessful extends FetchPokemonState {
 
 }
 
+class FetchPokemonNextPageLoading extends FetchPokemonState {
+  @override
+  List<Object> get props => [];
+}
+
+class FetchPokemonNextPageSuccessful extends FetchPokemonState {
+
+  final List<Pokemon> pokemon ;
+
+  const FetchPokemonNextPageSuccessful(this.pokemon);
+
+
+
+  @override
+  List<Object?> get props => [pokemon];
+
+}
+
 class FetchPokemonError extends FetchPokemonState {
   final String? error;
 
