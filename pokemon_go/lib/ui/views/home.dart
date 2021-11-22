@@ -26,7 +26,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late FavouritePokemonsBloc _favouritePokemonsBloc;
 
   List<Pokemon> pokemonList = <Pokemon>[];
-  ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
+   ValueNotifier<int> favouritecounter = ValueNotifier<int>(0);
 
   @override
   void initState() {
@@ -81,19 +82,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           const SizedBox(
                             width: 5,
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(5.0),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ceruleanBlue,
-                            ),
-                            child: const Center(
-                              child: Text('20',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400)),
-                            ),
+                          ValueListenableBuilder(
+                            valueListenable: favouritecounter,
+                            builder: (BuildContext context, int value, Widget? child) {
+                              return value > 0 ? Container(
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ceruleanBlue,
+                                ),
+                                child:  Center(
+                                  child: Text('$value',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400)),
+                                ),
+                              ) : const SizedBox();
+                            },
                           )
                         ],
                       ),
@@ -170,12 +176,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(12),
                         itemCount: state.pokemon.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 12,
                           childAspectRatio:
-                              width(context) / (height(context) - 100),
+                              0.6,
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           return PokemonItem(
@@ -211,7 +217,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 },
                 listener: (BuildContext context, Object? state) {
-
+                  if(state is FavouritePokemonsFetchSuccessful){
+                    favouritecounter.value = state.pokemon.length ;
+                  }
                 },
               ),
             ],
@@ -226,4 +234,3 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 }
-

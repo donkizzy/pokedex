@@ -33,6 +33,7 @@ dependencies:
   palette_generator: ^0.3.2
   hive_flutter: ^1.1.0
   lazy_load_scrollview: ^1.3.0
+  bloc_test: ^9.0.1
 
 
 
