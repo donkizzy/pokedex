@@ -39,11 +39,11 @@ class AllPokemon extends StatelessWidget {
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(12),
                 itemCount: pokemonList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 12,
-                  childAspectRatio: width(context) / (height(context) - 100),
+                  childAspectRatio: 0.6,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return PokemonItem(
@@ -58,7 +58,7 @@ class AllPokemon extends StatelessWidget {
               builder: (BuildContext context, bool value, Widget? child) {
                 return value
                     ? const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: ceruleanBlue,),
                 )
                     : const SizedBox();
               },
