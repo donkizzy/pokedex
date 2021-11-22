@@ -7,7 +7,6 @@ import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_event.dart';
 import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_state.dart';
 import 'package:pokemon_go/models/pokemon.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
-import 'package:pokemon_go/shared/app_constant.dart';
 import 'package:pokemon_go/ui/widgets/all_pokemon.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_loader.dart';
