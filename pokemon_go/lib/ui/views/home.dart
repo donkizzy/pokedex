@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_go/bloc/favourite_pokemons/favourite_pokemons_bloc.dart';
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   List<Pokemon> pokemonList = <Pokemon>[];
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
-   ValueNotifier<int> favouritecounter = ValueNotifier<int>(0);
+   ValueNotifier<int> favouriteCounter = ValueNotifier<int>(0);
 
   @override
   void initState() {
@@ -74,6 +73,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     Tab(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text('Favourites',
                               style: TextStyle(
@@ -82,7 +82,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             width: 5,
                           ),
                           ValueListenableBuilder(
-                            valueListenable: favouritecounter,
+                            valueListenable: favouriteCounter,
                             builder: (BuildContext context, int value, Widget? child) {
                               return value > 0 ? Container(
                                 padding: const EdgeInsets.all(5.0),
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 },
                 listener: (BuildContext context, Object? state) {
                   if(state is FavouritePokemonsFetchSuccessful){
-                    favouritecounter.value = state.pokemon.length ;
+                    favouriteCounter.value = state.pokemon.length ;
                   }
                 },
               ),
