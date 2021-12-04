@@ -31,7 +31,7 @@ it also has an intuitive UI that is designed to fit different screen sizes
 - [Hive](https://pub.dev/packages/hive_flutter) : These package helps with making saving information on devices easy i chose it because the data been stored doesn't require any complex relationship as it is simple app
 - [Lazy Load Scrollview](https://pub.dev/packages/lazy_load_scrollview) : These package helps paginations and allows ou set how far to the end of the list do you want to make another request
 
-##Do a critique: 
+## Do a critique: 
 The current implementation isn't perfect he current implementation isn't perfect. How could it be improved? 
 - Currently getting the pokemons isn't quite efficient as  the performing heavy operations(like getting the images dominant colors) , loops and getting the individual pokemons details. 
   

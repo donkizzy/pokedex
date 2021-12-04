@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pokemon_go/models/pokemon_detail_response.dart';
