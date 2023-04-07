@@ -38,18 +38,18 @@ class PokemonDetailResponse extends BaseResponse{
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['errorStatus'] = status;
-    _data['errorMessage'] = message;
-    _data['height'] = height;
-    _data['id'] = id;
-    _data['name'] = name;
-    _data['order'] = order;
-    _data['sprites'] = sprites!.toJson();
-    _data['stats'] = stats!.map((e)=>e.toJson()).toList();
-    _data['types'] = types!.map((e)=>e.toJson()).toList();
-    _data['weight'] = weight;
-    return _data;
+    final data = <String, dynamic>{};
+    data['errorStatus'] = status;
+    data['errorMessage'] = message;
+    data['height'] = height;
+    data['id'] = id;
+    data['name'] = name;
+    data['order'] = order;
+    data['sprites'] = sprites!.toJson();
+    data['stats'] = stats!.map((e)=>e.toJson()).toList();
+    data['types'] = types!.map((e)=>e.toJson()).toList();
+    data['weight'] = weight;
+    return data;
   }
 }
 
@@ -64,9 +64,9 @@ class Sprites {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['other'] = other.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['other'] = other.toJson();
+    return data;
   }
 }
 
@@ -81,9 +81,9 @@ class Other {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['official-artwork'] = officialArtwork.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['official-artwork'] = officialArtwork.toJson();
+    return data;
   }
 }
 
@@ -98,9 +98,9 @@ frontDefault = json['front_default'];
 }
 
 Map<String, dynamic> toJson() {
-  final _data = <String, dynamic>{};
-  _data['front_default'] = frontDefault;
-  return _data;
+  final data = <String, dynamic>{};
+  data['front_default'] = frontDefault;
+  return data;
 }
 }
 
@@ -121,11 +121,11 @@ class Stats {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['base_stat'] = baseStat;
-    _data['effort'] = effort;
-    _data['stat'] = stat.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['base_stat'] = baseStat;
+    data['effort'] = effort;
+    data['stat'] = stat.toJson();
+    return data;
   }
 }
 
@@ -143,10 +143,10 @@ class Stat {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['url'] = url;
-    return _data;
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
+    return data;
   }
 }
 
@@ -164,10 +164,10 @@ class Types {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['slot'] = slot;
-    _data['type'] = type.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['slot'] = slot;
+    data['type'] = type.toJson();
+    return data;
   }
 }
 
@@ -186,9 +186,9 @@ class Type {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['url'] = url;
-    return _data;
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
+    return data;
   }
 }

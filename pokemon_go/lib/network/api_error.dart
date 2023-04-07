@@ -56,7 +56,7 @@ class ApiError {
         message = response.data['message'];
 
         if(response.data['errors'] != null) {
-          message = message! + '. ' + response.data['errors'].toString();
+          message = '${message!}. ${response.data['errors']}';
 
         }
 

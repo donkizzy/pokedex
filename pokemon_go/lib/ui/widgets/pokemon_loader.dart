@@ -7,7 +7,7 @@ class PokemonLoader extends StatefulWidget {
   const PokemonLoader({Key? key}) : super(key: key);
 
   @override
-  _PokemonLoaderState createState() => _PokemonLoaderState();
+  State<PokemonLoader> createState() => _PokemonLoaderState();
 }
 
 class _PokemonLoaderState extends State<PokemonLoader> {

@@ -15,7 +15,7 @@ class PokeMonDetail extends StatefulWidget {
   const PokeMonDetail({Key? key, required this.pokemon}) : super(key: key);
 
   @override
-  _PokeMonDetailState createState() => _PokeMonDetailState();
+  State<PokeMonDetail> createState() => _PokeMonDetailState();
 }
 
 class _PokeMonDetailState extends State<PokeMonDetail> {

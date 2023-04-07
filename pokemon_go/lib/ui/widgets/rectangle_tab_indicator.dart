@@ -9,15 +9,15 @@ class CurvedRectangleIndicator extends Decoration {
         required this.indicatorColor,});
 
   @override
-  _CurvedRectanglePainter createBoxPainter([  VoidCallback? onChanged]) {
-    return _CurvedRectanglePainter(this, onChanged!);
+  CurvedRectanglePainter createBoxPainter([  VoidCallback? onChanged]) {
+    return CurvedRectanglePainter(this, onChanged!);
   }
 }
 
-class _CurvedRectanglePainter extends BoxPainter {
+class CurvedRectanglePainter extends BoxPainter {
   final CurvedRectangleIndicator decoration;
 
-  _CurvedRectanglePainter(this.decoration, VoidCallback onChanged) :super(onChanged);
+  CurvedRectanglePainter(this.decoration, VoidCallback onChanged) :super(onChanged);
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

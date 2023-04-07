@@ -28,14 +28,14 @@ class PokemonResponse extends BaseResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['errorStatus'] = status;
-    _data['errorMessage'] = message;
-    _data['count'] = count;
-    _data['next'] = next;
-    _data['previous'] = previous;
-    _data['results'] = results!.map((e)=>e.toJson()).toList();
-    return _data;
+    final data = <String, dynamic>{};
+    data['errorStatus'] = status;
+    data['errorMessage'] = message;
+    data['count'] = count;
+    data['next'] = next;
+    data['previous'] = previous;
+    data['results'] = results!.map((e)=>e.toJson()).toList();
+    return data;
   }
 }
 
@@ -53,9 +53,9 @@ class Results {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['url'] = url;
-    return _data;
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
+    return data;
   }
 }
