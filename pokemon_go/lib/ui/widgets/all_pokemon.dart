@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_bloc.dart';
-import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_event.dart';
 import 'package:pokemon_go/models/pokemon.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
 import 'package:pokemon_go/ui/widgets/pokemon_item.dart';
@@ -29,7 +26,7 @@ class AllPokemon extends StatelessWidget {
       ),
       child: LazyLoadScrollView(
         onEndOfPage: () {
-          _fetchPokemonBloc.add(const FetchPokemonNextPage());
+          _fetchPokemonBloc.fetchNextPokeMon();
         },
         child: Column(
           children: [

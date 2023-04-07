@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_go/bloc/favourite_pokemons/favourite_pokemons_bloc.dart';
 import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_bloc.dart';
-import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_event.dart';
 import 'package:pokemon_go/bloc/fetch_pokemons/fetch_pokemon_state.dart';
 import 'package:pokemon_go/models/pokemon.dart';
 import 'package:pokemon_go/shared/app_colors.dart';
@@ -31,8 +30,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     _fetchPokemonBloc = FetchPokemonBloc();
     _favouritePokemonsBloc = BlocProvider.of<FavouritePokemonsBloc>(context);
-    _favouritePokemonsBloc.add(const FetchFavouritePokemon());
-    _fetchPokemonBloc.add(const FetchPokemon());
+    _favouritePokemonsBloc.fetchFavouritePokemon();
+    _fetchPokemonBloc.fetchPokeMon();
 
     super.initState();
   }
@@ -129,11 +128,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         Center(child: Text('${state.error}')),
                         MaterialButton(
                           onPressed: () {
-                            _fetchPokemonBloc.add(const FetchPokemon());
+                            _fetchPokemonBloc.fetchPokeMon();
                           },
-                          child: const Text('Retry'),
                           color: ceruleanBlue,
                           textColor: Colors.white,
+                          child: const Text('Retry'),
                         )
                       ],
                     );
@@ -199,12 +198,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         Center(child: Text('${state.error}')),
                         MaterialButton(
                           onPressed: () {
-                            _favouritePokemonsBloc
-                                .add(const FetchFavouritePokemon());
+                            _favouritePokemonsBloc.fetchFavouritePokemon();
                           },
-                          child: const Text('Retry'),
                           color: ceruleanBlue,
                           textColor: Colors.white,
+                          child: const Text('Retry'),
                         )
                       ],
                     );

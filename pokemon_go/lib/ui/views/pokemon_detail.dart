@@ -52,13 +52,13 @@ class _PokeMonDetailState extends State<PokeMonDetail> {
         bloc: _checkPokemon,
         listener: (context, state) {
           if(state is SaveFavouritePokemonsSuccessful){
-           _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+            _favouritePokemonsBloc.fetchFavouritePokemon();
           }
           if(state is RemoveFavouritePokemon){
-            _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+            _favouritePokemonsBloc.fetchFavouritePokemon();
           }
           if(state is CheckFavouritePokemonsSuccessful){
-            _favouritePokemonsBloc.add(const FetchFavouritePokemon());
+            _favouritePokemonsBloc.fetchFavouritePokemon();
           }
         },
         builder: (context, state) {

@@ -54,7 +54,7 @@ class FetchPokemonBloc extends Cubit<FetchPokemonState> {
     }
   }
 
-  Future<void> fetchPokeMon(Emitter<FetchPokemonState> emit) async {
+  Future<void> fetchPokeMon() async {
     try {
       emit(FetchPokemonLoading());
 
