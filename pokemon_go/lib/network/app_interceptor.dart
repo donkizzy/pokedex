@@ -6,11 +6,6 @@ import 'package:flutter/widgets.dart';
 class AppInterceptor extends Interceptor {
   AppInterceptor();
 
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-
-       return super.onRequest(options, handler);
-    }
 
     @override
     void onResponse(Response response, ResponseInterceptorHandler handler) {
